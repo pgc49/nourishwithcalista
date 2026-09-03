@@ -121,13 +121,14 @@ const subscribeError = Astro.url.searchParams.get('err');
             return;
           }
           if (btn) btn.disabled = true;
+          // Form-encoded — JSON POSTs 502 on the custom domain (zone WAF).
+          var body = new URLSearchParams();
+          body.set('email', email);
+          body.set('website', website);
           fetch('/api/subscribe', {
             method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: email, website: website }),
+            headers: { Accept: 'application/json' },
+            body: body,
           })
             .then(function (res) {
               return res.json().then(function (data) {
