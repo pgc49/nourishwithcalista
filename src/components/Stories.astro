@@ -1,0 +1,19 @@
+---
+import { testimonials } from '../data/site';
+---
+
+<section class="section" id="stories">
+  <div class="wrap">
+    <h2>From the women I've worked with.</h2>
+    <div class="quotes">
+      {
+        testimonials.map((t) => (
+          <blockquote class="quote">
+            {t.quote}
+            <cite>{t.name}</cite>
+          </blockquote>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Page not found | Nourish with Calista"
+  description="That page isn’t here. Head home to meet Callie."
+>
+  <Nav />
+  <main id="main" class="notfound">
+    <div>
+      <h1>This page isn’t here.</h1>
+      <p>The new site is a single page. What you want is probably on the homepage.</p>
+      <a class="btn" href="/">Back home</a>
+    </div>
+  </main>
+  <Footer />
+</Layout>

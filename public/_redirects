@@ -1,0 +1,10 @@
+/wellnesscoaching        /#about       301
+/corporate-events        /#corporate   301
+/resources               /             301
+/fertility-course        /             301
+/7-day-gut-reset-course  /             301
+/contact                 /#corporate   301
+/checkout                /             301
+/index.html              /             301
+
+https://www.nourishwithcalista.com/*  https://nourishwithcalista.com/:splat  301

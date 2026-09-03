@@ -1,0 +1,23 @@
+---
+import { principles } from '../data/site';
+---
+
+<section class="section" id="how">
+  <div class="wrap">
+    <h2>How I work.</h2>
+    <p class="kicker">
+      Three things haven't changed since I started coaching, whether the goal
+      was fertility, gut health, or getting your body back after baby.
+    </p>
+    <div class="grid3">
+      {
+        principles.map((p) => (
+          <div>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

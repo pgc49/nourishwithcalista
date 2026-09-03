@@ -1,0 +1,8 @@
+# Cloudflare Pages — static Astro + functions/api/subscribe.ts
+name = "nourishwithcalista"
+compatibility_date = "2026-09-01"
+pages_build_output_dir = "dist"
+
+# Plaintext vars only. Secrets (RESEND_API_KEY) stay in the Pages dashboard.
+[vars]
+RESEND_AUDIENCE_ID = "f26d50aa-ffcb-4936-a970-20908c499174"
