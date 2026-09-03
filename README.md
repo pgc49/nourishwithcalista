@@ -5,7 +5,7 @@ Callie Chammas’s founder page. Static Astro on Cloudflare Pages — same patte
 Two jobs, in order:
 
 1. Send mamas to [macrosandmamas.com](https://www.macrosandmamas.com)
-2. Corporate speaking inquiries via `mailto:hello@nourishwithcalista.com`
+2. Corporate speaking inquiries via `mailto:calista@nourishwithcalista.com`
 
 ## Local
 

@@ -19,9 +19,9 @@ export function mmUrl(path = '/'): string {
 
 export const MM_URL = mmUrl('/');
 
-export const BOOKING_EMAIL = 'hello@nourishwithcalista.com';
+export const BOOKING_EMAIL = 'calista@nourishwithcalista.com';
 export const BOOKING_MAILTO =
-  'mailto:hello@nourishwithcalista.com?subject=Corporate%20session%20inquiry';
+  'mailto:calista@nourishwithcalista.com?subject=Corporate%20session%20inquiry';
 
 export const instagramUrl = 'https://www.instagram.com/nourishwithcalista/';
 export const linkedinUrl =
