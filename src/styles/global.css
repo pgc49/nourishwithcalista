@@ -152,8 +152,16 @@ input:focus-visible {
 .wrap {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding-left: max(36px, env(safe-area-inset-left, 0px));
+  padding-right: max(36px, env(safe-area-inset-right, 0px));
   width: 100%;
+}
+
+@media (min-width: 821px) {
+  .wrap {
+    padding-left: max(24px, env(safe-area-inset-left, 0px));
+    padding-right: max(24px, env(safe-area-inset-right, 0px));
+  }
 }
 
 .hp {
@@ -200,8 +208,26 @@ input:focus-visible {
 }
 
 @media (max-width: 640px) {
+  .nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 0 10px;
+    text-align: center;
+  }
+
+  .brand img {
+    height: 56px;
+  }
+
   .navlinks {
-    display: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 10px 16px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 14px;
   }
 }
 
@@ -250,7 +276,8 @@ input:focus-visible {
   grid-template-columns: 1.15fr 1fr;
   gap: 56px;
   align-items: center;
-  padding: 48px 0 88px;
+  padding-top: 48px;
+  padding-bottom: 88px;
 }
 
 .hero h1 {
@@ -320,12 +347,18 @@ input:focus-visible {
   .hero {
     grid-template-columns: 1fr;
     gap: 36px;
-    padding: 24px 0 64px;
+    padding-top: 16px;
+    padding-bottom: 64px;
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 9.2vw, 64px);
   }
 
   .portrait {
     order: -1;
     max-width: 340px;
+    margin-inline: auto;
   }
 
   .portrait .tag {
