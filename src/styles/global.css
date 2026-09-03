@@ -196,6 +196,14 @@ input:focus-visible {
   width: auto;
 }
 
+.nav-menu {
+  display: contents;
+}
+
+.nav-toggle {
+  display: none;
+}
+
 .navlinks {
   display: flex;
   gap: 28px;
@@ -209,25 +217,119 @@ input:focus-visible {
 
 @media (max-width: 640px) {
   .nav {
-    flex-direction: column;
+    position: relative;
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
     align-items: center;
-    gap: 16px;
-    padding: 22px 0 10px;
-    text-align: center;
+    padding: 14px 0 10px;
+  }
+
+  .brand {
+    grid-column: 2;
+    justify-self: center;
   }
 
   .brand img {
-    height: 56px;
+    height: 96px;
+  }
+
+  .nav-menu {
+    display: block;
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .nav-toggle {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .nav-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-bars,
+  .nav-bars::before,
+  .nav-bars::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+  }
+
+  .nav-bars {
+    position: relative;
+  }
+
+  .nav-bars::before,
+  .nav-bars::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .nav-bars::before {
+    top: -6px;
+  }
+
+  .nav-bars::after {
+    top: 6px;
+  }
+
+  .nav-menu[open] .nav-bars {
+    background: transparent;
+  }
+
+  .nav-menu[open] .nav-bars::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .nav-menu[open] .nav-bars::after {
+    top: 0;
+    transform: rotate(-45deg);
   }
 
   .navlinks {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
-    gap: 10px 16px;
-    width: 100%;
-    max-width: 300px;
-    font-size: 14px;
+    display: none;
+    position: absolute;
+    z-index: 20;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(68, 70, 73, 0.1);
+    font-size: 17px;
+  }
+
+  .nav-menu[open] .navlinks {
+    display: flex;
+  }
+
+  .navlinks a {
+    padding: 14px 16px;
+    text-align: center;
+  }
+
+  .navlinks a + a {
+    border-top: 1px solid var(--line);
   }
 }
 

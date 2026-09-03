@@ -11,11 +11,36 @@
         height="108"
       />
     </a>
-    <div class="navlinks">
-      <a href="#program">Macros and Mamas</a>
-      <a href="#about">About</a>
-      <a href="#stories">Stories</a>
-      <a href="#corporate">For companies</a>
-    </div>
+    <details class="nav-menu">
+      <summary class="nav-toggle">
+        <span class="hp">Menu</span>
+        <span class="nav-bars" aria-hidden="true"></span>
+      </summary>
+      <div class="navlinks">
+        <a href="#program">Macros and Mamas</a>
+        <a href="#about">About</a>
+        <a href="#stories">Stories</a>
+        <a href="#corporate">For companies</a>
+      </div>
+    </details>
   </nav>
 </header>
+
+<script is:inline>
+  (function () {
+    var menu = document.querySelector('.nav-menu');
+    if (!menu) return;
+    menu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        menu.removeAttribute('open');
+      });
+    });
+    document.addEventListener('click', function (e) {
+      if (!menu.open) return;
+      if (!menu.contains(e.target)) menu.removeAttribute('open');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.open) menu.removeAttribute('open');
+    });
+  })();
+</script>
