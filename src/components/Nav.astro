@@ -11,36 +11,52 @@
         height="108"
       />
     </a>
-    <details class="nav-menu">
-      <summary class="nav-toggle">
+    <div class="nav-menu">
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
         <span class="hp">Menu</span>
         <span class="nav-bars" aria-hidden="true"></span>
-      </summary>
-      <div class="navlinks">
+      </button>
+      <div class="navlinks" id="nav-links">
         <a href="#program">Macros and Mamas</a>
         <a href="#about">About</a>
         <a href="#stories">Stories</a>
         <a href="#corporate">For companies</a>
       </div>
-    </details>
+    </div>
   </nav>
 </header>
 
 <script is:inline>
   (function () {
     var menu = document.querySelector('.nav-menu');
-    if (!menu) return;
+    var toggle = document.querySelector('.nav-toggle');
+    if (!menu || !toggle) return;
+
+    function setOpen(open) {
+      menu.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setOpen(!menu.classList.contains('is-open'));
+    });
     menu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
-        menu.removeAttribute('open');
+        setOpen(false);
       });
     });
     document.addEventListener('click', function (e) {
-      if (!menu.open) return;
-      if (!menu.contains(e.target)) menu.removeAttribute('open');
+      if (!menu.classList.contains('is-open')) return;
+      if (!menu.contains(e.target)) setOpen(false);
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && menu.open) menu.removeAttribute('open');
+      if (e.key === 'Escape') setOpen(false);
     });
   })();
 </script>

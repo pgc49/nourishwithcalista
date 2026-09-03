@@ -230,11 +230,12 @@ input:focus-visible {
   }
 
   .brand img {
-    height: 96px;
+    height: 110px;
   }
 
   .nav-menu {
     display: block;
+    position: relative;
     grid-column: 3;
     justify-self: end;
   }
@@ -250,11 +251,6 @@ input:focus-visible {
     background: transparent;
     color: var(--ink);
     cursor: pointer;
-    list-style: none;
-  }
-
-  .nav-toggle::-webkit-details-marker {
-    display: none;
   }
 
   .nav-bars,
@@ -287,16 +283,16 @@ input:focus-visible {
     top: 6px;
   }
 
-  .nav-menu[open] .nav-bars {
+  .nav-menu.is-open .nav-bars {
     background: transparent;
   }
 
-  .nav-menu[open] .nav-bars::before {
+  .nav-menu.is-open .nav-bars::before {
     top: 0;
     transform: rotate(45deg);
   }
 
-  .nav-menu[open] .nav-bars::after {
+  .nav-menu.is-open .nav-bars::after {
     top: 0;
     transform: rotate(-45deg);
   }
@@ -305,27 +301,29 @@ input:focus-visible {
     display: none;
     position: absolute;
     z-index: 20;
-    top: 100%;
-    left: 0;
+    top: calc(100% + 6px);
     right: 0;
+    left: auto;
+    width: max-content;
+    min-width: 196px;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: 8px 0 16px;
+    padding: 6px 0;
     background: var(--paper);
     border: 1px solid var(--line);
-    border-radius: 16px;
-    box-shadow: 0 16px 40px rgba(68, 70, 73, 0.1);
-    font-size: 17px;
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(68, 70, 73, 0.12);
+    font-size: 15px;
   }
 
-  .nav-menu[open] .navlinks {
+  .nav-menu.is-open .navlinks {
     display: flex;
   }
 
   .navlinks a {
-    padding: 14px 16px;
-    text-align: center;
+    padding: 12px 18px;
+    text-align: left;
   }
 
   .navlinks a + a {
