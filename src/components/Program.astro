@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import kitchenImg from '../assets/callie-kitchen.jpg';
+import { MM_URL } from '../data/site';
+---
+
+<section class="section" id="program">
+  <div class="wrap">
+    <div class="feature">
+      <div>
+        <h2>Macros and Mamas is where all my <em>coaching</em> lives now.</h2>
+        <p class="kicker">
+          An 8-week program for the season after birth. You learn to fuel your
+          body, keep your muscle and your milk, and stop guessing about food.
+        </p>
+        <ul>
+          <li>
+            Ranges, not rules. I build your macro ranges by hand from your
+            intake, and they flex with nursing, sleep, and the week you actually
+            had.
+          </li>
+          <li>
+            Me in your corner Monday through Friday, in the group thread and
+            1:1, inside an app my husband built at our kitchen table.
+          </li>
+          <li>
+            Real food your kids recognize. No shakes, no supplements, and milk
+            supply protected by design.
+          </li>
+        </ul>
+        <div class="cta">
+          <a class="btn rose" href={MM_URL}>See the program</a>
+        </div>
+        <p class="fine">
+          Pricing, the free ranges quiz, and enrollment live at macrosandmamas.com.
+        </p>
+      </div>
+      <Image
+        src={kitchenImg}
+        alt="Callie cooking in her kitchen"
+        widths={[400, 700, 1000]}
+        sizes="(max-width: 820px) 90vw, 440px"
+      />
+    </div>
+  </div>
+</section>

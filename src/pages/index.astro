@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Program from '../components/Program.astro';
+import Principles from '../components/Principles.astro';
+import About from '../components/About.astro';
+import Stories from '../components/Stories.astro';
+import Corporate from '../components/Corporate.astro';
+import Doors from '../components/Doors.astro';
+import Footer from '../components/Footer.astro';
+
+const title =
+  'Callie Chammas, Functional Nutritionist | Founder of Macros and Mamas';
+const description =
+  'Callie Chammas is a functional nutritional therapy practitioner (FNTP), functional blood chemistry specialist (FBCS), mama of two, and founder of Macros and Mamas, an 8-week macro coaching program for postpartum moms. Also available for corporate wellness talks.';
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+  <main id="main">
+    <Hero />
+    <Program />
+    <Principles />
+    <About />
+    <Stories />
+    <Corporate />
+    <Doors />
+  </main>
+  <Footer />
+</Layout>

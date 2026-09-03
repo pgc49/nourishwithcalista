@@ -1,0 +1,159 @@
+---
+import {
+  BOOKING_EMAIL,
+  instagramUrl,
+  linkedinUrl,
+  MM_URL,
+} from '../data/site';
+
+const year = new Date().getFullYear();
+const subscribed = Astro.url.searchParams.get('subscribed') === '1';
+const subscribeError = Astro.url.searchParams.get('err');
+---
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div id="newsletter">
+        <h4>Stay in the loop.</h4>
+        <p>Occasional notes on nutrition, motherhood, and what I'm cooking. No spam.</p>
+        {
+          subscribed ? (
+            <p class="form-ok" role="status">You're on the list.</p>
+          ) : (
+            <>
+              <form
+                id="subscribe-form"
+                action="/api/subscribe"
+                method="post"
+              >
+                <div class="hp" aria-hidden="true">
+                  <label>
+                    Website
+                    <input
+                      type="text"
+                      name="website"
+                      tabindex="-1"
+                      autocomplete="off"
+                    />
+                  </label>
+                </div>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="you@email.com"
+                  autocomplete="email"
+                  aria-label="Email address"
+                />
+                <button type="submit">Subscribe</button>
+              </form>
+              <p
+                id="subscribe-error"
+                class="form-err"
+                role="alert"
+                hidden={!subscribeError}
+              >
+                {
+                  subscribeError === 'invalid_email'
+                    ? 'Please enter a valid email.'
+                    : subscribeError
+                      ? 'Something went wrong. Try again.'
+                      : ''
+                }
+              </p>
+              <p class="form-ok" id="subscribe-ok" hidden>You're on the list.</p>
+            </>
+          )
+        }
+      </div>
+      <div>
+        <ul>
+          <li><a href={MM_URL}>Macros and Mamas</a></li>
+          <li><a href="#about">About Callie</a></li>
+          <li><a href="#stories">Client stories</a></li>
+          <li><a href="#corporate">Corporate sessions</a></li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li><a href={instagramUrl} rel="me">Instagram</a></li>
+          <li><a href={linkedinUrl} rel="me">LinkedIn</a></li>
+          <li><a href={`mailto:${BOOKING_EMAIL}`}>Email Callie</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© {year} Nourish with Calista</span>
+      <span>Calista Chammas, FNTP, FBCS</span>
+    </div>
+  </div>
+</footer>
+
+{
+  !subscribed && (
+    <script is:inline>
+      (function () {
+        var form = document.getElementById('subscribe-form');
+        if (!form) return;
+        var err = document.getElementById('subscribe-error');
+        var ok = document.getElementById('subscribe-ok');
+        var btn = form.querySelector('button[type="submit"]');
+
+        function showError(msg) {
+          if (!err) return;
+          err.textContent = msg;
+          err.hidden = false;
+        }
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var emailInput = form.querySelector('input[name="email"]');
+          var honey = form.querySelector('input[name="website"]');
+          var email = emailInput ? String(emailInput.value || '').trim() : '';
+          var website = honey ? String(honey.value || '').trim() : '';
+          if (err) {
+            err.hidden = true;
+            err.textContent = '';
+          }
+          if (!email) {
+            showError('Please enter a valid email.');
+            return;
+          }
+          if (btn) btn.disabled = true;
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, website: website }),
+          })
+            .then(function (res) {
+              return res.json().then(function (data) {
+                return { ok: res.ok, data: data };
+              });
+            })
+            .then(function (result) {
+              if (result.ok && result.data && result.data.ok) {
+                form.hidden = true;
+                if (ok) ok.hidden = false;
+                return;
+              }
+              var code = result.data && result.data.error;
+              showError(
+                code === 'invalid_email'
+                  ? 'Please enter a valid email.'
+                  : 'Something went wrong. Try again.',
+              );
+              if (btn) btn.disabled = false;
+            })
+            .catch(function () {
+              showError('Something went wrong. Try again.');
+              if (btn) btn.disabled = false;
+            });
+        });
+      })();
+    </script>
+  )
+}

@@ -1,0 +1,34 @@
+---
+import { BOOKING_MAILTO, corporateTopics } from '../data/site';
+---
+
+<section class="section alt" id="corporate">
+  <div class="wrap corp">
+    <div>
+      <h2>Bring Callie to your <em>team</em>.</h2>
+      <p class="kicker">
+        I work with companies that want their employees to take real care of
+        their health. That looks like wellness week talks, lunch-and-learns, and
+        small-group sessions for women on the topics that rarely get discussed
+        at work.
+      </p>
+      <div class="cta">
+        <a class="btn" href={BOOKING_MAILTO}>Book a session</a>
+      </div>
+      <p class="fine">
+        Virtual or in person in the Bay Area. Tell me your group size, format,
+        and the topic you have in mind.
+      </p>
+    </div>
+    <ul class="topics">
+      {
+        corporateTopics.map((t) => (
+          <li>
+            <h3>{t.title}</h3>
+            <p>{t.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

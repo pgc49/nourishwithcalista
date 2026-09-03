@@ -1,0 +1,112 @@
+---
+import '../styles/global.css';
+import { siteUrl, instagramUrl, linkedinUrl, MM_ORIGIN } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+}
+
+const {
+  title,
+  description,
+  ogTitle = 'Callie Chammas | Nourish with Calista',
+  ogDescription = 'Functional nutritionist, mama of two, founder of Macros and Mamas. Corporate wellness speaker.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+const noindex =
+  import.meta.env.PUBLIC_NOINDEX === 'true' ||
+  import.meta.env.PUBLIC_NOINDEX === '1';
+
+const personId = `${siteUrl}/#person`;
+const orgId = `${siteUrl}/#organization`;
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': personId,
+  name: 'Calista Chammas',
+  alternateName: 'Callie Chammas',
+  jobTitle: 'Functional Nutritional Therapy Practitioner',
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'FNTP',
+      name: 'Functional Nutritional Therapy Practitioner',
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'FBCS',
+      name: 'Functional Blood Chemistry Specialist',
+    },
+  ],
+  url: siteUrl,
+  image: `${siteUrl}/og.jpg`,
+  sameAs: [instagramUrl, linkedinUrl, MM_ORIGIN],
+  founderOf: {
+    '@type': 'Organization',
+    '@id': orgId,
+    name: 'Macros and Mamas',
+    url: MM_ORIGIN,
+  },
+};
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Nourish with Calista',
+  url: siteUrl,
+  provider: { '@id': personId },
+  areaServed: ['San Francisco Bay Area', 'Remote'],
+  serviceType: ['Corporate wellness speaking', "Women's health workshops"],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={`${siteUrl}/og.jpg`} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="google-site-verification"
+      content="7ctttFvm0IdzL2s-cFO6BukEiPRJHwRqRdcFlkgeYwk"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="preload"
+      href="/fonts/newsreader-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/figtree-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceLd)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

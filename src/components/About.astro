@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import familyImg from '../assets/callie-family.jpg';
+import { MM_URL } from '../data/site';
+---
+
+<section class="section alt" id="about">
+  <div class="wrap about">
+    <Image
+      src={familyImg}
+      alt="Callie with her two boys"
+      widths={[360, 540, 720]}
+      sizes="(max-width: 820px) 360px, 40vw"
+    />
+    <div>
+      <h2>Meet Callie.</h2>
+      <p>
+        I'm a functional nutritional therapy practitioner, a functional blood
+        chemistry specialist, a mama of two, and the founder of Macros and
+        Mamas. For years I worked one-on-one with women on fertility, hormones,
+        and gut health, reading their labs to get to the root of what was going
+        on instead of chasing symptoms.
+      </p>
+      <p>
+        Then I had my own kids and realized how little of the advice out there
+        was written for this season. You're exhausted, you're feeding someone
+        else all day, and every plan assumes you have time you don't have. So I
+        built the program I wished I'd had.
+      </p>
+      <p>
+        Working with me means we're a team. You're in the driver's seat. I'm in
+        the passenger seat with the map, and I will never shame you about food.
+      </p>
+      <div class="creds">
+        <span>FNTP, Functional Nutritional Therapy Practitioner</span>
+        <span>FBCS, Functional Blood Chemistry Specialist</span>
+        <span>Mama of two</span>
+      </div>
+      <div class="note">
+        I'm not taking new 1:1 clients right now. If you want to work with me,{' '}
+        <a href={MM_URL}>Macros and Mamas</a> is the place, and it includes 1:1
+        messaging with me for all eight weeks.
+      </div>
+    </div>
+  </div>
+</section>
