@@ -121,28 +121,21 @@ const subscribeError = Astro.url.searchParams.get('err');
             return;
           }
           if (btn) btn.disabled = true;
-          fetch('/api/subscribe', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: email, website: website }),
-          })
+          // Form-encoded, no Accept: application/json — that header 502s
+          // on the custom domain (zone WAF). The Function then 303s.
+          var body = new URLSearchParams();
+          body.set('email', email);
+          body.set('website', website);
+          fetch('/api/subscribe', { method: 'POST', body: body })
             .then(function (res) {
-              return res.json().then(function (data) {
-                return { ok: res.ok, data: data };
-              });
-            })
-            .then(function (result) {
-              if (result.ok && result.data && result.data.ok) {
+              var dest = new URL(res.url, window.location.origin);
+              if (dest.searchParams.get('subscribed') === '1') {
                 form.hidden = true;
                 if (ok) ok.hidden = false;
                 return;
               }
-              var code = result.data && result.data.error;
               showError(
-                code === 'invalid_email'
+                dest.searchParams.get('err') === 'invalid_email'
                   ? 'Please enter a valid email.'
                   : 'Something went wrong. Try again.',
               );

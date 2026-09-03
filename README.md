@@ -45,16 +45,13 @@ Do **not** add the `@astrojs/cloudflare` adapter. This site is static HTML plus 
 
 Optional build var: `PUBLIC_NOINDEX=true` on preview.
 
-### Domain cutover
+### Domain
 
-DNS for `nourishwithcalista.com` is already on Cloudflare (currently Webflow).
+`nourishwithcalista.com` and `www.nourishwithcalista.com` are Pages custom domains. Apex + www CNAMEs point at `nourishwithcalista.pages.dev` (proxied). Google Workspace MX records must stay untouched.
 
-1. Pages project → Custom domains → add `nourishwithcalista.com` and `www.nourishwithcalista.com`
-2. Let Cloudflare replace the Webflow A records and the `www` CNAME to `proxy-ssl.webflow.com`
-3. Redirect `www` → apex (a `_redirects` rule is already in `public/_redirects`)
-4. SSL/TLS: Full (strict). Always Use HTTPS: on
+`www` → apex is handled by `functions/_middleware.ts`. Pages `_redirects` cannot match on hostname.
 
-Do not attach the domain until the `*.pages.dev` preview has been checked.
+SSL/TLS should be **Full (strict)**. Always Use HTTPS: on.
 
 ## Newsletter
 
