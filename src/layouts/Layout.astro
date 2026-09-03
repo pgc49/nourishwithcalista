@@ -12,7 +12,7 @@ interface Props {
 const {
   title,
   description,
-  ogTitle = 'Calista Chammas | Nourish with Calista',
+  ogTitle = 'Callie Chammas',
   ogDescription = 'Functional nutritionist, mama of two, founder of Macros and Mamas. Corporate wellness speaker.',
 } = Astro.props;
 
@@ -76,10 +76,12 @@ const serviceLd = {
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
-    <meta property="og:image" content={`${siteUrl}/og.jpg`} />
+    <meta property="og:image" content={`${siteUrl}/og.jpg?v=callie`} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nourish with Calista" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
     <meta
       name="google-site-verification"
       content="7ctttFvm0IdzL2s-cFO6BukEiPRJHwRqRdcFlkgeYwk"
