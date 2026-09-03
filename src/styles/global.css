@@ -249,7 +249,7 @@ input:focus-visible {
     padding: 0;
     border: 0;
     background: transparent;
-    color: var(--ink);
+    color: var(--green);
     cursor: pointer;
   }
 
